@@ -71,7 +71,7 @@
       </div>
 
       <div v-if="pagination" class="flex justify-center items-center mt-10">
-        <pagination :pagination="pagination" :get-data="getCoins"></pagination>
+        <pagination :pagination="pagination" :get-data="getCoins" :per_page="10"></pagination>
       </div>
 
     </div>
