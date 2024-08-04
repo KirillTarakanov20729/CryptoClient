@@ -39,6 +39,34 @@
                 <p v-if="errors.price" class="text-red-500">{{ errors.price[0] }}</p>
               </div>
 
+              <div class="w-full">
+                <label for="type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Type</label>
+                <select v-model="bid.type" id="type" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                  <option :value=null :selected="bid.type === null ">Choose a type</option>
+                  <option value="sell">Sell</option>
+                  <option value="buy">Buy</option>
+                </select>
+                <p v-if="errors.type" class="text-red-500">{{ errors.type[0] }}</p>
+              </div>
+
+              <div class="w-full">
+                <label for="payment_method" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Type</label>
+                <select v-model="bid.payment_method" id="payment_method" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                  <option :value=null :selected="bid.type === null ">Choose a payment method</option>
+                  <option value="Alfa-bank">Alfa-bank</option>
+                  <option value="Sber">Sber</option>
+                  <option value="Tincoff">Tincoff</option>
+                </select>
+                <p v-if="errors.type" class="text-red-500">{{ errors.type[0] }}</p>
+              </div>
+
+
+              <div class="sm:col-span-2">
+                <label for="number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone number</label>
+                <input v-model="bid.number" type="text" name="number" id="number" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="+79109431712">
+                <p v-if="errors.number" class="text-red-500">{{ errors.number[0] }}</p>
+              </div>
+
               <div class="sm:col-span-2">
                 <label for="user_telegram_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">User telegram id</label>
                 <input v-model="bid.user_telegram_id" type="text" name="user_telegram_id" id="user_telegram_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="542342342">
@@ -88,7 +116,10 @@ export default {
         currency_id: 0,
         user_telegram_id: null,
         amount: null,
-        price: null
+        price: null,
+        number: null,
+        payment_method: null,
+        type: null
       },
       url_backend: import.meta.env.VITE_URL_BACKEND,
       test_backend: import.meta.env.VITE_TEST_BACKEND
@@ -113,7 +144,10 @@ export default {
           'currency_id': this.bid.currency_id,
           'user_telegram_id': this.bid.user_telegram_id,
           'amount': this.bid.amount,
-          'price': this.bid.price
+          'price': this.bid.price,
+          'number': this.bid.number,
+          'payment_method': this.bid.payment_method,
+          'type' : this.bid.type
         })
         this.success = res.data.message
       } catch (errors) {
