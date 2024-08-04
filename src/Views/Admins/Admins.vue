@@ -48,7 +48,7 @@
       </div>
 
       <div v-if="pagination" class="flex justify-center items-center mt-10">
-        <pagination :pagination="pagination" :get-data="getAdmins"></pagination>
+        <pagination :pagination="pagination" :get-data="getAdmins" :per_page="10"></pagination>
       </div>
 
     </div>

@@ -99,7 +99,6 @@ export default {
     initFlowbite()
     this.getCoins()
     this.getCurrencies()
-    this.getUsers()
   },
 
   methods: {
@@ -136,15 +135,6 @@ export default {
 
       console.log(res)
       this.currencies = res.data.data
-    },
-
-    async getUsers() {
-      const res = await api.post(this.url_backend + 'api/client/users/index', {
-        'page': 1
-      });
-
-      console.log(res)
-      this.users = res.data.data
     }
   }
 }
