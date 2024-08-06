@@ -1,72 +1,86 @@
 <template>
 
-  <section class=" dark:bg-gray-900 p-3 sm:p-5">
-    <div class="mx-auto max-w-screen-xl px-4 lg:px-12">
 
-      <section class="bg-gray-200 rounded-3xl dark:bg-gray-900">
-        <div class="py-8 px-4 mx-auto max-w-2xl lg:py-16">
-          <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white text-center">Update user</h2>
-          <form @submit.prevent="updateUser" action="#" method="POST">
-            <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
+  <Container>
 
-              <div class="w-full">
-                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">User name</label>
-                <input v-model="user.name" type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Josh">
-                <p v-if="errors.name" class="text-red-500">{{ errors.name[0] }}</p>
-              </div>
+    <Card>
+      <CardBody>
 
-              <div class="w-full">
-                <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-                <input v-model="user.email" type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="josh@mail.ru">
-                <p v-if="errors.email" class="text-red-500">{{ errors.email[0] }}</p>
-              </div>
+        <FormLabel :label="'Update user'"/>
+        <FormComponent :on-submit="updateUser">
 
-              <div class="w-full">
-                <label for="telegram_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Telegram ID</label>
-                <input v-model="user.telegram_id" type="text" name="telegram_id" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="5423423423">
-                <p v-if="errors.telegram_id" class="text-red-500">{{ errors.telegram_id[0] }}</p>
-              </div>
-
-              <div class="w-full">
-                <label for="is_logged_in" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Is logged in</label>
-                <select v-model="user.is_logged_in" id="is_logged_in" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                  <option>Choose a status</option>
-                  <option :selected="user.is_logged_in === 0" value="0">not logged</option>
-                  <option :selected="user.is_logged_in === 1" value="1">logged</option>
-                </select>
-                <p v-if="errors.is_logged_in" class="text-red-500">{{ errors.is_logged_in[0] }}</p>
-              </div>
-
-
+          <FormBody>
+            <div class="w-full">
+              <FormInputLabel :label="'Name'" :input-name="'name'" />
+              <FormInput v-model="user.name" :type="'text'" :name="'name'" :placeholder="'Joshua'" />
+              <FormError v-if="errors.name" :text="errors.name[0]" />
             </div>
 
-            <div class="text-center mt-8">
-              <button type="submit" class="py-3 px-4 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
-                Update
-              </button>
+            <div class="w-full">
+              <FormInputLabel :label="'Email'" :input-name="'email'" />
+              <FormInput v-model="user.email" :type="'email'" :name="'email'" :placeholder="'joshua@me.com'" />
+              <FormError v-if="errors.email" :text="errors.email[0]" />
             </div>
 
-            <div v-if="success" class="text-center">
-              <p class="text-green-500">{{ success }}</p>
+            <div class="w-full">
+              <FormInputLabel :label="'Telegram ID'" :input-name="'telegram_id'" />
+              <FormInput v-model="user.telegram_id" :type="'text'" :name="'telegram_id'" :placeholder="'123456789'" />
+              <FormError v-if="errors.telegram_id" :text="errors.telegram_id[0]" />
             </div>
 
-            <div v-if="error" class="text-center">
-              <p class="text-red-500">{{ error }}</p>
+            <div class="w-full">
+              <FormInputLabel :label="'Status'" :input-name="'is_logged_in'" />
+              <FormSelect v-model="user.is_logged_in" :options="options" />
+              <FormError v-if="errors.is_logged_in" :text="errors.is_logged_in[0]" />
             </div>
 
-          </form>
-        </div>
-      </section>
-    </div>
-  </section>
+          </FormBody>
+
+          <FormButton :type="'submit'" :label="'Update user'" />
+
+          <FormSuccess v-if="success" :text="success" />
+
+          <FormError v-if="error" :text="error" />
+
+        </FormComponent>
+      </CardBody>
+    </Card>
+
+  </Container>
 
 </template>
 
 <script>
 import api from "@/Assets/api.js";
 import {initFlowbite} from "flowbite";
+import FormInputLabel from "@/Shared/UI/Form/FormInputLabel.vue";
+import FormInput from "@/Shared/UI/Form/FormInput.vue";
+import FormButton from "@/Shared/UI/Form/FormButton.vue";
+import FormError from "@/Shared/UI/Form/FormError.vue";
+import Card from "@/Shared/UI/Card/Card.vue";
+import CardBody from "@/Shared/UI/Card/CardBody.vue";
+import FormLabel from "@/Shared/UI/Form/FormLabel.vue";
+import FormComponent from "@/Shared/UI/Form/FormComponent.vue";
+import FormBody from "@/Shared/UI/Form/FormBody.vue";
+import Container from "@/Shared/UI/Container /Container.vue";
+import FormSuccess from "@/Shared/UI/Form/FormSuccess.vue";
+import FormSelect from "@/Shared/UI/Form/FormSelect.vue";
 export default {
   name: "UpdateCoin",
+  components: {
+    FormSuccess,
+    Container,
+    FormBody,
+    FormComponent,
+    FormLabel,
+    CardBody,
+    Card,
+    FormError,
+    FormButton,
+    FormInput,
+    FormInputLabel,
+    FormSelect
+  },
   data() {
     return {
       errors: {},
@@ -78,6 +92,10 @@ export default {
         telegram_id: null,
         is_logged_in: null
       },
+      options: [
+        {id: 0, name: 'not logged'},
+        {id: 1, name: 'logged'}
+      ],
       url_backend: import.meta.env.VITE_URL_BACKEND,
       test_backend: import.meta.env.VITE_TEST_BACKEND
     }
