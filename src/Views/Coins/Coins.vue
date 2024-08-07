@@ -99,7 +99,6 @@ export default {
 
   components: {
     Pagination,
-    SearchInput
   },
   data() {
     return {
