@@ -90,7 +90,6 @@
 import { initFlowbite } from 'flowbite'
 import Pagination from "@/Shared/Pagination/Pagination.vue";
 import api from "@/Assets/api.js";
-import SearchInput from "@/Shared/UI/Table/SearchInput.vue";
 export default {
   name: "Coins",
   mounted() {
