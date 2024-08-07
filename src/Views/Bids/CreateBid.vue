@@ -1,80 +1,111 @@
 <template>
 
-  <section class=" dark:bg-gray-900 p-3 sm:p-5">
-    <div class="mx-auto max-w-screen-xl px-4 lg:px-12">
+  <Container>
 
-      <section class="bg-gray-200 rounded-3xl dark:bg-gray-900">
-        <div class="py-8 px-4 mx-auto max-w-2xl lg:py-16">
-          <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white text-center">Create bid</h2>
-          <form @submit.prevent="storeBid" action="#" method="POST">
-            <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
+    <Card>
+      <CardBody>
+
+        <FormLabel :label="'Create Bid'" />
+        <FormComponent :on-submit="storeBid">
+
+          <FormBody>
 
               <div class="w-full">
-                <label for="coin_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Coin</label>
-                <select v-model="bid.coin_id" id="coin_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                  <option value="0" :selected="bid.coin_id === 0">Choose coin</option>
-                  <option v-for="coin in coins" :value="coin.id">{{ coin.name }}</option>
-                </select>
-                <p v-if="errors.coin_id" class="text-red-500">{{ errors.coin_id[0] }}</p>
+                <FormInputLabel :label="'Coin'" :input-name="'coin_id'" />
+                <FormSelect v-model="coin_id" :options="coins" />
+                <FormError v-if="errors.coin_id" :text="errors.coin_id[0]" />
               </div>
 
               <div class="w-full">
-                <label for="amount" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Amount</label>
-                <input v-model="bid.amount" type="number" name="amount" id="amount" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="1000">
-                <p v-if="errors.amount" class="text-red-500">{{ errors.amount[0] }}</p>
+                <FormInputLabel :label="'Amount'" :input-name="'amount'" />
+                <FormInput v-model="amount" :type="'number'" :name="'amount'" :placeholder="'10000'" />
+                <FormError v-if="errors.amount" :text="errors.amount[0]" />
               </div>
 
               <div class="w-full">
-                <label for="currency_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Currency</label>
-                <select v-model="bid.currency_id" id="currency_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                  <option value="0" :selected="bid.currency_id === 0">Choose a currency</option>
-                  <option v-for="currency in currencies" :value="currency.id">{{ currency.name }}</option>
-                </select>
-                <p v-if="errors.currency_id" class="text-red-500">{{ errors.currency_id[0] }}</p>
+                <FormInputLabel :label="'Currency'" :input-name="'currency_id'" />
+                <FormSelect v-model="currency_id" :options="currencies" />
+                <FormError v-if="errors.currency_id" :text="errors.currency_id[0]" />
               </div>
 
               <div class="w-full">
-                <label for="amount" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
-                <input v-model="bid.price" type="number" name="price" id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="1500">
-                <p v-if="errors.price" class="text-red-500">{{ errors.price[0] }}</p>
+                <FormInputLabel :label="'Price'" :input-name="'price'" />
+                <FormInput v-model="price" :type="'number'" :name="'price'" :placeholder="'10000'" />
+                <FormError v-if="errors.price" :text="errors.price[0]" />
+              </div>
+
+              <div class="w-full">
+                <FormInputLabel :input-name="'type'" :label="'Type'" />
+                <FormSelect v-model="type" :options="types" />
+                <FormError v-if="errors.type" :text="errors.type[0]" />
+              </div>
+
+              <div class="w-full">
+                <FormInputLabel :label="'Payment method'" :input-name="'payment_method'" />
+                <FormSelect v-model="payment_method" :options="payment_methods" />
+                <FormError v-if="errors.payment_method" :text="errors.payment_method[0]" />
               </div>
 
               <div class="sm:col-span-2">
-                <label for="user_telegram_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">User telegram id</label>
-                <input v-model="bid.user_telegram_id" type="text" name="user_telegram_id" id="user_telegram_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="542342342">
-                <p v-if="errors.user_telegram_id" class="text-red-500">{{ errors.user_telegram_id[0] }}</p>
+                <FormInputLabel :label="'Number'" :input-name="'number'" />
+                <FormInput v-model="number" :type="'number'" :name="'number'" :placeholder="'10000'" />
+                <FormError v-if="errors.number" :text="errors.number[0]" />
+              </div>
+
+              <div class="sm:col-span-2">
+                <FormInputLabel :label="'User telegram id'" :input-name="'user_telegram_id'" />
+                <FormInput v-model="user_telegram_id" :type="'text'" :name="'user_telegram_id'" :placeholder="'234234234'" />
+                <FormError v-if="errors.user_telegram_id" :text="errors.user_telegram_id[0]" />
               </div>
 
 
-            </div>
+          </FormBody>
 
-            <div class="text-center mt-8">
-              <button type="submit" class="py-3 px-4 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
-                Create
-              </button>
-            </div>
+          <FormButton :type="'submit'" :label="'Create'"/>
 
-            <div v-if="success" class="text-center">
-              <p class="text-green-500">{{ success }}</p>
-            </div>
+          <FormSuccess v-if="success" :text="success"/>
 
-            <div v-if="error" class="text-center">
-              <p class="text-red-500">{{ error }}</p>
-            </div>
+          <FormError v-if="error" :text="error"/>
 
-          </form>
-        </div>
-      </section>
-    </div>
-  </section>
+        </FormComponent>
+      </CardBody>
+    </Card>
+
+  </Container>
 
 </template>
 
 <script>
 import api from "@/Assets/api.js";
 import {initFlowbite} from "flowbite";
+import FormInputLabel from "@/Shared/UI/Form/FormInputLabel.vue";
+import FormInput from "@/Shared/UI/Form/FormInput.vue";
+import FormButton from "@/Shared/UI/Form/FormButton.vue";
+import FormError from "@/Shared/UI/Form/FormError.vue";
+import Card from "@/Shared/UI/Card/Card.vue";
+import CardBody from "@/Shared/UI/Card/CardBody.vue";
+import FormLabel from "@/Shared/UI/Form/FormLabel.vue";
+import FormComponent from "@/Shared/UI/Form/FormComponent.vue";
+import FormBody from "@/Shared/UI/Form/FormBody.vue";
+import Container from "@/Shared/UI/Container /Container.vue";
+import FormSuccess from "@/Shared/UI/Form/FormSuccess.vue";
+import FormSelect from "@/Shared/UI/Form/FormSelect.vue";
 export default {
   name: "UpdateCoin",
+  components: {
+    FormSelect,
+    FormSuccess,
+    Container,
+    FormBody,
+    FormComponent,
+    FormLabel,
+    CardBody,
+    Card,
+    FormButton,
+    FormInput,
+    FormInputLabel,
+    FormError
+  },
   data() {
     return {
       errors: {},
@@ -83,13 +114,46 @@ export default {
       coins: [],
       currencies: [],
       users: [],
-      bid: {
-        coin_id: 0,
-        currency_id: 0,
-        user_telegram_id: null,
-        amount: null,
-        price: null
-      },
+      payment_method: 'Default',
+      coin_id: 'Default',
+      currency_id: 'Default',
+      user_telegram_id: null,
+      amount: null,
+      price: null,
+      number: null,
+      type: 'Default',
+      payment_methods: [
+        {
+          id: "Default",
+          name: "Choose a payment method"
+        },
+        {
+          id: "Alfa-bank",
+          name: "Alfa-bank"
+        },
+        {
+          id: "Sber",
+          name: "Sber"
+        },
+        {
+          id: "Tincoff",
+          name: "Tincoff"
+        }
+      ],
+      types: [
+        {
+          id: "Default",
+          name: "Choose a type"
+        },
+        {
+          id: "sell",
+          name: "Sell"
+        },
+        {
+          id: "buy",
+          name: "Buy"
+        }
+      ],
       url_backend: import.meta.env.VITE_URL_BACKEND,
       test_backend: import.meta.env.VITE_TEST_BACKEND
     }
@@ -109,11 +173,14 @@ export default {
 
       try {
         const res = await api.post(this.url_backend + 'api/client/bids/store', {
-          'coin_id': this.bid.coin_id,
-          'currency_id': this.bid.currency_id,
-          'user_telegram_id': this.bid.user_telegram_id,
-          'amount': this.bid.amount,
-          'price': this.bid.price
+          'coin_id': this.coin_id,
+          'currency_id': this.currency_id,
+          'user_telegram_id': this.user_telegram_id,
+          'amount': this.amount,
+          'price': this.price,
+          'number': this.number,
+          'payment_method': this.payment_method,
+          'type' : this.type
         })
         this.success = res.data.message
       } catch (errors) {
@@ -125,16 +192,20 @@ export default {
 
     async getCoins() {
       const res = await api.get(this.url_backend + 'api/client/coins/all');
-
-      console.log(res)
       this.coins = res.data.data
+      this.coins.unshift({
+        id: 'Default',
+        name: 'Choose a coin'
+      })
     },
 
     async getCurrencies() {
       const res = await api.get(this.url_backend + 'api/client/currencies/all');
-
-      console.log(res)
       this.currencies = res.data.data
+      this.currencies.unshift({
+        id: 'Default',
+        name: 'Choose a currency'
+      })
     }
   }
 }

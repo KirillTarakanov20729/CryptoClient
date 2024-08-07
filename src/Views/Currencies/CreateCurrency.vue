@@ -1,51 +1,72 @@
 <template>
 
-  <section class=" dark:bg-gray-900 p-3 sm:p-5">
-    <div class="mx-auto max-w-screen-xl px-4 lg:px-12">
+  <Container>
 
-      <section class="bg-gray-200 rounded-3xl dark:bg-gray-900">
-        <div class="py-8 px-4 mx-auto max-w-2xl lg:py-16">
-          <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white text-center">Add new currency</h2>
-          <form @submit.prevent="createCurrency" action="#" method="POST">
-            <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
+    <Card>
+      <CardBody>
 
-              <div class="w-full">
-                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Coin name</label>
-                <input v-model="name" type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Russian ruble">
-                <p v-if="errors.name" class="text-red-500">{{ errors.name[0] }}</p>
-              </div>
+        <FormLabel :label="'Create currency'" />
 
-              <div class="w-full">
-                <label for="symbol" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Symbol</label>
-                <input v-model="symbol" type="text" name="symbol" id="symbol" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="RUB">
-                <p v-if="errors.symbol" class="text-red-500">{{ errors.symbol[0] }}</p>
-              </div>
+        <FormComponent :on-submit="createCurrency">
 
+          <FormBody>
+
+            <div class="w-full">
+              <FormInputLabel :label="'Name'" :input-name="'name'"/>
+              <FormInput v-model="name" :type="'text'" :name="'name'" :placeholder="'Russian ruble'"/>
+              <FormError v-if="errors.name" :text=errors.name[0] />
             </div>
 
-            <div class="text-center mt-8">
-              <button type="submit" class="py-3 px-4 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
-                Create currency
-              </button>
+            <div class="w-full">
+              <FormInputLabel :label="'Symbol'" :input-name="'symbol'"/>
+              <FormInput v-model="symbol" :type="'text'" :name="'symbol'" :placeholder="'RUB'"/>
+              <FormError v-if="errors.symbol" :text=errors.symbol[0] />
             </div>
 
-            <div v-if="success" class="text-center">
-              <p class="text-green-500">{{ success }}</p>
-            </div>
+          </FormBody>
 
-          </form>
-        </div>
-      </section>
-    </div>
-  </section>
+          <FormButton :type="'submit'" :label="'Create'"/>
+
+          <FormSuccess v-if="success" :text="success"/>
+
+        </FormComponent>
+
+      </CardBody>
+    </Card>
+
+  </Container>
 
 </template>
 
 <script>
 import api from "@/Assets/api.js";
 import {initFlowbite} from "flowbite";
+import FormInputLabel from "@/Shared/UI/Form/FormInputLabel.vue";
+import FormInput from "@/Shared/UI/Form/FormInput.vue";
+import FormButton from "@/Shared/UI/Form/FormButton.vue";
+import FormError from "@/Shared/UI/Form/FormError.vue";
+import Card from "@/Shared/UI/Card/Card.vue";
+import CardBody from "@/Shared/UI/Card/CardBody.vue";
+import FormLabel from "@/Shared/UI/Form/FormLabel.vue";
+import FormComponent from "@/Shared/UI/Form/FormComponent.vue";
+import FormBody from "@/Shared/UI/Form/FormBody.vue";
+import Container from "@/Shared/UI/Container /Container.vue";
+import FormSuccess from "@/Shared/UI/Form/FormSuccess.vue";
 export default {
   name: "CreateCoin",
+  components: {
+    FormLabel,
+    FormInputLabel,
+    FormInput,
+    FormButton,
+    FormError,
+    Card,
+    CardBody,
+    FormComponent,
+    FormBody,
+    Container,
+    FormSuccess
+  },
   data() {
     return {
       name: null,

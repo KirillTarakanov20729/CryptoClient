@@ -1,56 +1,78 @@
 <template>
 
-  <section class=" dark:bg-gray-900 p-3 sm:p-5">
-    <div class="mx-auto max-w-screen-xl px-4 lg:px-12">
+  <Container>
 
-      <section class="bg-gray-200 rounded-3xl dark:bg-gray-900">
-        <div class="py-8 px-4 mx-auto max-w-2xl lg:py-16">
-          <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white text-center">Add new coin</h2>
-          <form @submit.prevent="createCoin" action="#" method="POST">
-            <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
+      <Card>
+        <CardBody>
+
+          <FormLabel :label="'Create Coin'"/>
+          <FormComponent :on-submit="createCoin">
+
+            <FormBody>
 
               <div class="sm:col-span-2">
-                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Coin name</label>
-                <input v-model="name" type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Bitcoin">
-                <p v-if="errors.name" class="text-red-500">{{ errors.name[0] }}</p>
+                <FormInputLabel :label="'Name'" :input-name="'name'" />
+                <FormInput v-model="name" :type="'text'" :name="'name'" :placeholder="'Bitcoin'" />
+                <FormError v-if="errors.name" :text="errors.name[0]"  />
               </div>
 
               <div class="w-full">
-                <label for="symbol" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Symbol</label>
-                <input v-model="symbol" type="text" name="symbol" id="symbol" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="BTC">
-                <p v-if="errors.symbol" class="text-red-500">{{ errors.symbol[0] }}</p>
+                <FormInputLabel :label="'Symbol'" :input-name="'symbol'" />
+                <FormInput v-model="symbol" :type="'text'" :name="'symbol'" :placeholder="'BTC'" />
+                <FormError v-if="errors.symbol" :text="errors.symbol[0]"  />
               </div>
 
               <div class="w-full">
-                <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
-                <input v-model="price" type="text" name="price" id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="$2999">
-                <p v-if="errors.price" class="text-red-500">{{ errors.price[0] }}</p>
+                <FormInputLabel :label="'Price'" :input-name="'price'" />
+                <FormInput v-model="price" :type="'number'" :name="'price'" :placeholder="'10000'" />
+                <FormError v-if="errors.price" :text="errors.price[0]"  />
               </div>
-            </div>
 
-            <div class="text-center mt-8">
-              <button type="submit" class="py-3 px-4 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
-                Create coin
-              </button>
-            </div>
+            </FormBody>
 
-            <div v-if="success" class="text-center">
-              <p class="text-green-500">{{ success }}</p>
-            </div>
+            <FormButton :type="'submit'" :label="'Add coin'"/>
 
-          </form>
-        </div>
-      </section>
-    </div>
-  </section>
+            <FormSuccess v-if="success" />
+
+          </FormComponent>
+
+        </CardBody>
+      </Card>
+
+  </Container>
 
 </template>
 
 <script>
 import api from "@/Assets/api.js";
 import {initFlowbite} from "flowbite";
+import FormInputLabel from "@/Shared/UI/Form/FormInputLabel.vue";
+import FormInput from "@/Shared/UI/Form/FormInput.vue";
+import FormButton from "@/Shared/UI/Form/FormButton.vue";
+import FormError from "@/Shared/UI/Form/FormError.vue";
+import Card from "@/Shared/UI/Card/Card.vue";
+import CardBody from "@/Shared/UI/Card/CardBody.vue";
+import FormLabel from "@/Shared/UI/Form/FormLabel.vue";
+import FormComponent from "@/Shared/UI/Form/FormComponent.vue";
+import FormBody from "@/Shared/UI/Form/FormBody.vue";
+import Container from "@/Shared/UI/Container /Container.vue";
+import FormSuccess from "@/Shared/UI/Form/FormSuccess.vue";
 export default {
   name: "CreateCoin",
+
+  components: {
+    FormLabel,
+    FormInputLabel,
+    FormInput,
+    FormButton,
+    FormError,
+    Card,
+    CardBody,
+    FormComponent,
+    FormBody,
+    Container,
+    FormSuccess
+  },
   data() {
     return {
       name: null,
@@ -81,15 +103,12 @@ export default {
         })
 
         this.success = res.data.message
-        this.name = null
-        this.symbol = null
-        this.price = null
       } catch (errors) {
         if (errors.response.status === 422) {
           this.errors = errors.response.data.errors
         }
       }
-    }
+    },
   }
 }
 </script>

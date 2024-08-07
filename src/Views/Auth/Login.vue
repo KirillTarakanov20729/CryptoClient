@@ -35,10 +35,10 @@
 </template>
 
 <script>
-import FormLabel from "@/Shared/Form/FormLabel.vue";
-import FormInput from "@/Shared/Form/FormInput.vue";
-import FormButton from "@/Shared/Form/FormButton.vue";
-import FormError from "@/Shared/Form/FormError.vue";
+import FormLabel from "@/Shared/UI/Form/FormInputLabel.vue";
+import FormInput from "@/Shared/UI/Form/FormInput.vue";
+import FormButton from "@/Shared/UI/Form/FormButton.vue";
+import FormError from "@/Shared/UI/Form/FormError.vue";
 
 export default {
   name: "Register",
