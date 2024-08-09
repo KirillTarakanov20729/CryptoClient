@@ -11,13 +11,13 @@
 
         <div>
           <FormLabel :label="'Email'" :input-name="'email'" />
-          <FormInput :set-attribute="setEmail" :name="'email'" :type="'email'" />
+          <FormInput v-model="email" :name="'email'" :type="'email'" />
           <FormError v-if="errors.email" :text=errors.email[0]  />
         </div>
 
         <div>
           <FormLabel :label="'Password'" :input-name="'password'" />
-          <FormInput :set-attribute="setPassword" :name="'password'" :type="'password'" />
+          <FormInput v-model="password" :name="'password'" :type="'password'" />
           <FormError v-if="errors.password" :text=errors.password[0]  />
         </div>
 
