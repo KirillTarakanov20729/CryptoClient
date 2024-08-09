@@ -12,19 +12,19 @@
           <FormBody>
             <div class="w-full">
               <FormInputLabel :label="'Name'" :input-name="'name'" />
-              <FormInput v-model="user.name" :type="'text'" :name="'name'" :placeholder="'Joshua'" />
+              <FormInput v-model="user.name" :value="user.name" :type="'text'" :name="'name'" :placeholder="'Joshua'" />
               <FormError v-if="errors.name" :text="errors.name[0]" />
             </div>
 
             <div class="w-full">
               <FormInputLabel :label="'Email'" :input-name="'email'" />
-              <FormInput v-model="user.email" :type="'email'" :name="'email'" :placeholder="'joshua@me.com'" />
+              <FormInput v-model="user.email" :value="user.email" :type="'email'" :name="'email'" :placeholder="'joshua@me.com'" />
               <FormError v-if="errors.email" :text="errors.email[0]" />
             </div>
 
             <div class="w-full">
               <FormInputLabel :label="'Telegram ID'" :input-name="'telegram_id'" />
-              <FormInput v-model="user.telegram_id" :type="'text'" :name="'telegram_id'" :placeholder="'123456789'" />
+              <FormInput v-model="user.telegram_id" :value="user.telegram_id" :type="'text'" :name="'telegram_id'" :placeholder="'123456789'" />
               <FormError v-if="errors.telegram_id" :text="errors.telegram_id[0]" />
             </div>
 
