@@ -48,7 +48,7 @@ import CardBody from "@/Shared/UI/Card/CardBody.vue";
 import FormLabel from "@/Shared/UI/Form/FormLabel.vue";
 import FormComponent from "@/Shared/UI/Form/FormComponent.vue";
 import FormBody from "@/Shared/UI/Form/FormBody.vue";
-import Container from "@/Shared/UI/Container /Container.vue";
+import Container from "@/Shared/UI/Container/Container.vue";
 import FormSuccess from "@/Shared/UI/Form/FormSuccess.vue";
 export default {
   name: "CreateCoin",
