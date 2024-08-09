@@ -11,7 +11,7 @@
 
             <div class="sm:col-span-2">
               <FormInputLabel :label="'Email'" :input-name="'email'" />
-              <FormInput v-model="admin.email" :type="'email'" :name="'email'" :placeholder="'qJbY4@example.com'" />
+              <FormInput v-model="admin.email" :value="admin.email" :type="'email'" :name="'email'" :placeholder="'qJbY4@example.com'" />
               <FormError v-if="errors.email" :text="errors.email" />
             </div>
 

@@ -11,13 +11,13 @@
 
               <div class="w-full">
                 <FormInputLabel :label="'Name'" :input-name="'name'" />
-                <FormInput v-model="currency.name" :type="'text'" :name="'name'" :placeholder="'Russian ruble'" />
+                <FormInput v-model="currency.name" :value="currency.name" :type="'text'" :name="'name'" :placeholder="'Russian ruble'" />
                 <FormError v-if="errors.name" :text=errors.name[0]  />
               </div>
 
               <div class="w-full">
                 <FormInputLabel :label="'Symbol'" :input-name="'symbol'" />
-                <FormInput v-model="currency.symbol" :type="'text'" :name="'symbol'" :placeholder="'RUB'" />
+                <FormInput v-model="currency.symbol" :value="currency.symbol" :type="'text'" :name="'symbol'" :placeholder="'RUB'" />
                 <FormError v-if="errors.symbol" :text=errors.symbol[0]  />
               </div>
             </FormBody>

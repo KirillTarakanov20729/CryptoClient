@@ -10,19 +10,19 @@
 
               <div class="sm:col-span-2">
                 <FormInputLabel :label="'Name'" :input-name="'name'" />
-                <FormInput v-model="coin.name" :name="'name'" :type="'text'" :placeholder="'Bitcoin'" />
+                <FormInput v-model="coin.name" :value="coin.name" :name="'name'" :type="'text'" :placeholder="'Bitcoin'" />
                 <FormError v-if="errors.name" :text=errors.name[0]  />
               </div>
 
               <div class="w-full">
                 <FormInputLabel :label="'Symbol'" :input-name="'symbol'" />
-                <FormInput v-model="coin.symbol" :name="'symbol'" :type="'text'" :placeholder="'BTC'" />
+                <FormInput v-model="coin.symbol" :value="coin.symbol" :name="'symbol'" :type="'text'" :placeholder="'BTC'" />
                 <FormError v-if="errors.symbol" :text=errors.symbol[0]  />
               </div>
 
               <div class="w-full">
                 <FormInputLabel :label="'Price'" :input-name="'price'" />
-                <FormInput v-model="coin.price" :name="'price'" :type="'text'" :placeholder="'10000'" />
+                <FormInput v-model="coin.price" :value="coin.price" :name="'price'" :type="'text'" :placeholder="'10000'" />
                 <FormError v-if="errors.price" :text=errors.price[0]  />
               </div>
 

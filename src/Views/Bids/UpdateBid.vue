@@ -18,7 +18,7 @@
 
               <div class="w-full">
                 <FormInputLabel :label="'Amount'" :input-name="'amount'" />
-                <FormInput v-model="bid.amount" :name="'amount'" :type="'number'" :placeholder="'10000'" />
+                <FormInput v-model="bid.amount" :value="bid.amount" :name="'amount'" :type="'number'" :placeholder="'10000'" />
                 <FormError v-if="errors.amount" :text=errors.amount[0]  />
               </div>
 
@@ -30,7 +30,7 @@
 
               <div class="w-full">
                 <FormInputLabel :label="'Price'" :input-name="'price'" />
-                <FormInput v-model="bid.price" :name="'price'" :type="'number'" :placeholder="'10000'" />
+                <FormInput v-model="bid.price" :value="bid.price" :name="'price'" :type="'number'" :placeholder="'10000'" />
                 <FormError v-if="errors.price" :text=errors.price[0]  />
               </div>
 
@@ -48,13 +48,13 @@
 
               <div class="sm:col-span-2">
                 <FormInputLabel :label="'Telegram ID'" :input-name="'user_telegram_id'" />
-                <FormInput v-model="bid.user.telegram_id" :name="'user_telegram_id'" :type="'text'" :placeholder="'123456789'" />
+                <FormInput v-model="bid.user.telegram_id" :value="bid.user.telegram_id" :name="'user_telegram_id'" :type="'text'" :placeholder="'123456789'" />
                 <FormError v-if="errors.user_telegram_id" :text=errors.user_telegram_id[0]  />
               </div>
 
               <div class="sm:col-span-2">
                 <FormInputLabel :label="'Number'" :input-name="'number'" />
-                <FormInput v-model="bid.number" :name="'number'" :type="'text'" :placeholder="'123456789'" />
+                <FormInput v-model="bid.number" :value="bid.number" :name="'number'" :type="'text'" :placeholder="'123456789'" />
                 <FormError v-if="errors.number" :text=errors.number[0]  />
               </div>
 
