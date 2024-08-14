@@ -124,10 +124,9 @@ export default {
 
     async deleteCurrency(id) {
       try {
-        const res = await api.delete(this.url_backend + 'api/client/currencies/delete/' + id)
+        await api.delete(this.url_backend + 'api/client/currencies/delete/' + id)
         await this.getCurrencies();
       } catch (error) {
-        console.log(error);
       }
     },
 

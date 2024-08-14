@@ -90,7 +90,7 @@ export default {
 
     async deletePayment(id) {
       try {
-        const res = await api.delete(this.url_backend + 'api/client/payments/delete/' + id)
+        await api.delete(this.url_backend + 'api/client/payments/delete/' + id)
         await this.getPayments();
       } catch (error) {
         console.log(error);
