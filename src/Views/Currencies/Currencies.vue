@@ -60,7 +60,7 @@
                   </svg>
                 </RouterLink>
 
-                <a @click="deleteCoin(currency.id)" href="#" class="">
+                <a @click="deleteCurrency(currency.id)" href="#" class="">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                        stroke="currentColor" class="size-6">
                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -122,12 +122,11 @@ export default {
       }
     },
 
-    async deleteCoin(id) {
+    async deleteCurrency(id) {
       try {
-        const res = await api.delete(this.url_backend + 'api/client/currencies/delete/' + id)
+        await api.delete(this.url_backend + 'api/client/currencies/delete/' + id)
         await this.getCurrencies();
       } catch (error) {
-        console.log(error);
       }
     },
 
