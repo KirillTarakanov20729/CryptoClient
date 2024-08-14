@@ -15,6 +15,7 @@ import CreateBid from "@/Views/Bids/CreateBid.vue";
 import UpdateBid from "@/Views/Bids/UpdateBid.vue";
 import CreateAdmin from "@/Views/Admins/CreateAdmin.vue";
 import UpdateAdmin from "@/Views/Admins/UpdateAdmin.vue";
+import Payments from "@/Views/Payments/Payments.vue";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -71,6 +72,10 @@ const router = createRouter({
             name: 'UpdateBid',
             path: '/bids/update/:id',
             component: UpdateBid
+        }, {
+            name: 'Payments',
+            path: '/payments',
+            component: Payments
         },{
             name: 'Admins',
             path: '/admins',
