@@ -1,29 +1,30 @@
-# cryptoclient
 
-This template should help get you started developing with Vue 3 in Vite.
+# Crypto Client
 
-## Recommended IDE Setup
+Клиентская часть моего пет-проекта. Представляет из себя административную панель на Vue 3 + Tailwind + Flowbite 
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
 
-## Customize configuration
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+## Installation
 
-## Project Setup
+Установка стандартная
 
-```sh
-npm install
+```bash
+  npm install
+  cp .env-example .env
+  npm run dev
 ```
+    
+## Documentation
 
-### Compile and Hot-Reload for Development
+Реализовано:
 
-```sh
-npm run dev
-```
+* CRUD
+* Авторизация через JWT токен
+* Фильтры для поиска
+* Пагинация
 
-### Compile and Minify for Production
+Что хотелось бы реализовать:
 
-```sh
-npm run build
-```
+* Модальные окна
+
