@@ -10,15 +10,22 @@
 
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-              <th scope="col" class="px-4 py-3 text-center">Request User</th>
-              <th scope="col" class="px-4 py-3 text-center">Response User</th>
+              <th scope="col" class="px-4 py-3 text-center">Payment UUID</th>
+              <th scope="col" class="px-4 py-3 text-center">Request User Telegram ID</th>
+              <th scope="col" class="px-4 py-3 text-center">Request User Email</th>
+              <th scope="col" class="px-4 py-3 text-center">Response User Telegram ID</th>
+              <th scope="col" class="px-4 py-3 text-center">Response User Email</th>
               <th scope="col" class="px-4 py-3 text-center">Bid</th>
+              <th scope="col" class="px-4 py-3 text-center">Actions</th>
             </tr>
             </thead>
             <tbody v-for="payment in payments">
             <tr class="border-b dark:border-gray-700">
-              <th scope="row" class="px-4 py-3 font-medium whitespace-nowrap dark:text-white text-center">{{payment.request_user.telegram_id}}</th>
+              <th scope="row" class="px-4 py-3 font-medium whitespace-nowrap dark:text-white text-center">{{payment.uuid}}</th>
+              <td class="px-4 py-3 text-center">{{payment.request_user.telegram_id}}</td>
+              <td class="px-4 py-3 text-center">{{payment.request_user.email}}</td>
               <td class="px-4 py-3 text-center">{{ payment.response_user.telegram_id }}</td>
+              <td class="px-4 py-3 text-center">{{ payment.response_user.email }}</td>
 
               <td v-if= "payment.bid" class="px-4 py-3 text-center">{{ payment.bid.uuid }}</td>
               <td v-else class="px-4 py-3 text-center">-</td>
